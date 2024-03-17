@@ -40,6 +40,7 @@
     },
     mounted() {
           this.token = localStorage.getItem('token');
+          console.log("this.token = "+this.token)
           this.fetchWishlist();
       }
   }

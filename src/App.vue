@@ -1,4 +1,7 @@
 <template>
+  
+  <Navbar></Navbar>
+  
   <router-view
     v-if="products && categories"
     :baseURL="baseURL"
@@ -13,10 +16,11 @@
 
 <script>
 import axios from 'axios';
+import Navbar from './components/Navbar.vue';
 import Footer from './components/Footer.vue'
 
 export default {
-  components: {Footer},
+  components: {Footer, Navbar},
   data() {
     return {
       baseURL: 'http://localhost:8081/',
