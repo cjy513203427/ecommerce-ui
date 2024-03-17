@@ -1,10 +1,50 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <router-view
+    v-if="products && categories"
+    :baseURL="baseURL"
+    :products="products"
+    :categories="categories"
+    @fetchData="fetchData"
+  >
+  </router-view>
+
+  <Footer></Footer>
 </template>
+
+<script>
+import axios from 'axios';
+import Footer from './components/Footer.vue'
+
+export default {
+  components: {Footer},
+  data() {
+    return {
+      baseURL: 'http://localhost:8081/',
+      products: null,
+      categories: null
+    }
+  },
+  methods:{
+    async fetchData(){
+      // api get category
+      await axios.get(this.baseURL + "category/list")
+      .then(res => {
+        this.categories = res.data
+      }).catch((err) => console.log('err', err))
+
+      // api get product
+      await axios.get(this.baseURL + "product/")
+      .then(res => {
+        this.products = res.data
+      }).catch((err) => console.log('err', err))
+    }
+  },
+  mounted(){
+    this.fetchData()
+  }
+
+};
+</script>
 
 <style>
 #app {
