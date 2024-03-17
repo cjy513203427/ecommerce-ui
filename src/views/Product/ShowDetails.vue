@@ -70,6 +70,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data() {
     return {
@@ -116,6 +118,8 @@ export default {
         })
         .then(
           (response) => {
+            
+            console.log("Product Added to the cart!")
             if (response.status == 201) {
               swal({
                 text: "Product Added to the cart!",
